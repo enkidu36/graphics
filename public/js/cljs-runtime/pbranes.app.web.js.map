@@ -1,0 +1,1 @@
+{"version":3,"sources":["pbranes/app/web.cljs"],"mappings":";AAEA,6BAAA,7BAAMA;AAAN,AACE,gHAAA,zGAACC","names":["pbranes.app.web/init!","cljs.core.println"],"sourcesContent":["(ns pbranes.app.web)\r\n\r\n(defn init! []\r\n  (println \"Hello Dolly!!\"))\r\n"]}

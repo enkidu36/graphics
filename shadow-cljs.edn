@@ -1,0 +1,13 @@
+{:source-paths
+ ["src/main"
+  "src/dev"]
+
+ :dependencies
+ [[lilactown/helix "0.1.10"]]
+
+ :dev-http {9000 "public"}
+ :builds
+{:web
+ {:target :browser
+  :modules {:main {:init-fn pbranes.app.web/init!}}}}}
+ }
