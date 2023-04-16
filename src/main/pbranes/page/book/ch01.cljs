@@ -13,10 +13,16 @@
         paragraph (hooks/use-ref nil)]
 
     (hooks/use-effect [] :once
-                      (let [ctx (u/get-webgl-context (.-current glcanvas))
-                                ]
+                      (let [ctx (u/get-webgl-context (.-current glcanvas))]
                         (set! (.. paragraph -current -textContent) (u/webgl-support-msg ctx))))
+
+    (hooks/use-effect :once
+                      (fn mount []
+                        (js/window.addEventListener "keydown" (fn [e]  (js/console.log "keydown mount")))
+                        (fn unmount []
+                          (js/window.removeEventListener " keydown" (js/console.log "keydown unmount") ))))
+    
     (<>
      (d/div {:class "webgl-support-msg"}
             (d/p {:ref paragraph} "[ Here would go the results of WebGL feature detection ]"))
-     (d/canvas {:ref glcanvas :class "glcanvas"} "Your browser does not support canvas"))))
+     (d/canvas {:ref glcanvas :class "glcanvas"} "Sorry! No HTML5 Canvas was found on this page"))))
