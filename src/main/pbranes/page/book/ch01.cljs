@@ -7,7 +7,7 @@
 (defn main [gl]
    (u/update-clear-color gl [1.0 1.0 1.0 1.0]))
 
-(defnc ppage []
+(defnc page []
   (let [glcanvas (hooks/use-ref nil)
         paragraph (hooks/use-ref nil)]
 
@@ -18,21 +18,10 @@
                         (js/window.addEventListener "keydown" (u/check-key ctx))
                         (fn unmount []
                           (js/window.removeEventListener "keydown" (fn [e] (js/console.log "remove keydown listen"))))))
-
        
     (<>
      (d/div {:class "webgl-support-msg"}
             (d/p {:ref paragraph} "[ Here would go the results of WebGL feature detection ]"))
-     (d/canvas {:ref glcanvas :class "glcanvas"} "Sorry! No HTML5 Canvas was found on this page"))))
-
-
-(defnc page [main-fn]
-  (let [glcanvas (hooks/use-ref nil)]
-
-    (hooks/use-effect [] :once
-                      (let [ctx (u/get-webgl-context (.-current glcanvas))]
-                        (main-fn ctx)))
-       
-    (d/canvas {:ref glcanvas :class "glcanvas"} "Sorry! No HTML5 Canvas was found on this page")))
+     (d/canvas {:id "ch01-canvas" :ref glcanvas :class "glcanvas"} "Sorry! No HTML5 Canvas was found on this page"))))
 
 

@@ -47,6 +47,9 @@ body {
   color: yellow;
 }
 
+.canvas {
+  border: 5px dotted blue
+}
 
 .glcanvas {
   width: 800px;
