@@ -7,7 +7,7 @@
 
  :dev-http {9000 "public"}
  :builds
-{:web
+{:webgl
  {:target :browser
   :modules {:main {:init-fn pbranes.app.web/init!}}}}}
  }

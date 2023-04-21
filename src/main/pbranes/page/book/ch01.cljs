@@ -20,6 +20,7 @@
                           (js/window.removeEventListener "keydown" (fn [e] (js/console.log "remove keydown listen"))))))
        
     (<>
+     (d/div "hi hello")
      (d/div {:class "webgl-support-msg"}
             (d/p {:ref paragraph} "[ Here would go the results of WebGL feature detection ]"))
      (d/canvas {:id "ch01-canvas" :ref glcanvas :class "glcanvas"} "Sorry! No HTML5 Canvas was found on this page"))))

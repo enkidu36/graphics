@@ -5,8 +5,6 @@
             [pbranes.webgl.utils :as u]))
 
 
-(defnc test []
-  (d/div "hello test"))
 
 (defnc webgl-canvas-component [main-fn]
   (let [glcanvas (hooks/use-ref nil)]

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "gl-matrix": "^3.4.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0"
   },
