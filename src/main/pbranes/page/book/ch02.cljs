@@ -36,24 +36,12 @@ void main(void) {
 (def program (atom nil))
 (def indices [0 1 2 0 2 3])
 
-(defn get-shader [gl source type]
-  (let [shader (.createShader gl type)]
-
-    ;; Compile the shader using the supplied shader code
-    (.shaderSource gl shader source)
-    (.compileShader gl shader)
-
-    ;; Ensure the shader is valid
-    (if  (not (.getShaderParameter gl shader (.-COMPILE_STATUS gl)))
-      (js/console.log  (.getShaderInfoLog gl shader))
-      shader)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Create a program with the appropriate vertex and fragment shaders
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn init-program [gl]
-  (let [vertex-shader (get-shader gl vs-shader (.-VERTEX_SHADER gl))
-        fragment-shader (get-shader gl fs-shader (.-FRAGMENT_SHADER gl))]
+  (let [vertex-shader (u/get-shader gl vs-shader (.-VERTEX_SHADER gl))
+        fragment-shader (u/get-shader gl fs-shader (.-FRAGMENT_SHADER gl))]
 
     ;; Create program
     (reset! program (.createProgram gl))

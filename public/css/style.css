@@ -31,6 +31,12 @@ body {
   gap: 10px;
 }
 
+.header .nav .div {
+    display: flex;
+    direction: column;
+    gap: 5px;
+}
+
 .header a {
   color: yellow;
 }
