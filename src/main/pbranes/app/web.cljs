@@ -14,9 +14,9 @@
                    (d/nav {:class "nav"}
                           ($ rr/Link {:to "/"} "Chapter 01")
                           (d/div
-                           ($ rr/Link {:to "/ch02"} "Chapter 02")
+                           ($ rr/Link {:to "/ch02"} "Chapter 02 - Rectangle")
                            (d/br)
-                           ($ rr/Link {:to "/ch02-modes"} "Modes"))))
+                           ($ rr/Link {:to "/ch02-modes"} "Chapter 02 - Rendering Modes"))))
          (d/div {:class "main"} ($ rr/Outlet))
          (d/footer {:class "footer"} "footer")))
 
