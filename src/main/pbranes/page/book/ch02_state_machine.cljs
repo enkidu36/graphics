@@ -1,4 +1,4 @@
-(ns pbranes.page.book.ch02-modes
+(ns pbranes.page.book.ch02-state-machine
  (:require [helix.core :refer [defnc <> $]]
   [helix.dom :as d]
   [helix.hooks :as hooks]
@@ -21,4 +21,4 @@
       ;; (set! (.-width canvas) (.-innerWidth js/window))
       ;; (main (.-current canvas)))
       )
-(d/div "hello template page")))
+(d/div "hello state machine page")))

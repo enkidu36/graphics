@@ -17,6 +17,7 @@
   (let [gui (.addFolder (dg/GUI.) name)]
     (.onChange (.add gui (clj->js  settings) "options" (clj->js options)) (fn [v] (on-change v)))
     (.open gui)
+    gui
     ;;
     )
 

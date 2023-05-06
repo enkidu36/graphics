@@ -2,6 +2,7 @@
   (:require [helix.core :refer [defnc <> $]]
             [helix.dom :as d]
             [helix.hooks :as hooks]
+            [pbranes.webgl.constants :as wc]
             [pbranes.webgl.utils :as u]))
 
 (set! *warn-on-infer* false)
@@ -96,7 +97,7 @@ void main(void) {
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn draw [gl]
   ;; Clear the screen
-  (.clear gl  (bit-or (.-COLOR_BUFFER_BIT gl) (.-DEPTH_BUFFER_BIT gl)))
+  (.clear gl  (bit-or wc/COLOR-BUFFER-BIT wc/DEPTH-BUFFER-BIT))
   (.viewport gl 0 0 (.. gl  -canvas -width) (.. gl -canvas -height))
 
   ;; Bind the VAO

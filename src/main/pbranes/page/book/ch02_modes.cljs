@@ -3,6 +3,7 @@
             [helix.dom :as d]
             [helix.hooks :as hooks]
             ["dat.gui" :as gui]
+            [pbranes.webgl.constants :as wc]
             [pbranes.webgl.utils :as u]))
 
 (set! *warn-on-infer* false)
@@ -43,9 +44,10 @@ void main(void) {
 
 (def program (atom nil))
 (def trapezoid-VAO (atom nil))
+(def dat-gui (atom nil))
 
 (defn render-element [gl indices type]
-  (.bufferData gl (.-ELEMENT_ARRAY_BUFFER gl) (js/Uint16Array. indices) (.-STATIC_DRAW gl))
+  (.bufferData gl wc/ELEMENT-ARRAY-BUFFER (js/Uint16Array. indices) (.-STATIC_DRAW gl))
   (.drawElements gl type (count indices) (.-UNSIGNED_SHORT gl) 0))
 
 (defn init-program [gl]
@@ -73,8 +75,8 @@ void main(void) {
     (reset! trapezoid-VAO (.createVertexArray gl))
     (.bindVertexArray gl @trapezoid-VAO)
 
-    (.bindBuffer gl (.-ARRAY_BUFFER gl) trapezoid-vertex-buffer)
-    (.bufferData gl (.-ARRAY_BUFFER gl) (js/Float32Array. vertices) (.-STATIC_DRAW gl))
+    (.bindBuffer gl wc/ARRAY-BUFFER trapezoid-vertex-buffer)
+    (.bufferData gl wc/ARRAY-BUFFER (js/Float32Array. vertices) wc/STATIC-DRAW)
 
     ;; Provide instructions to VAO
     (.vertexAttribPointer gl (.-aVertexPosition @program) 3 (.-FLOAT gl) false 0 0)
@@ -128,18 +130,21 @@ void main(void) {
     ;; Call the functions in an appropriate order
     (init-program gl)
     (init-buffers gl)
-    (u/configure-controls settings)
+    (reset! dat-gui  (u/configure-controls settings))
     (let [render (fn render []
                    (draw gl)
                    (js/requestAnimationFrame render))]
-      (js/requestAnimationFrame render))
-))
+      (js/requestAnimationFrame render))))
 
 (defnc page []
   (let [canvas (hooks/use-ref nil)]
 
     (hooks/use-effect [rendering-mode]
       :always
-      (init (.-current canvas)))
+      (init (.-current canvas))
+      (fn unmount []
+        (.destroy  (.getRoot @dat-gui))
+
+        (reset! dat-gui nil)))
 
     (d/canvas {:id "mode-cvs" :ref canvas :class "canvas"})))
